@@ -28,7 +28,12 @@ FrameSerial::~FrameSerial()
 {
 }
 
-
+/**
+ * Begin a serial communication
+ *
+ * @param baudrate speed of the serial communication in bauds
+ * @return void
+ */
 void FrameSerial::begin(long baudrate) 
 {
     if(_isHwSerial)
@@ -39,17 +44,32 @@ void FrameSerial::begin(long baudrate)
     {
         static_cast<SoftwareSerial*>(_serial)->begin(baudrate);
     }
-
 }
 
+/**
+ * Check if there are frames to read in buffer.
+ * Need to call this function in loop to process
+ * bytes from Serial
+ *
+ * @param void
+ * @return number of frames in buffer
+ */
 uint8_t FrameSerial::available() 
 {
     processIncomingData();
     return framesInBuffer();
 }
 
+/**
+ * Send a frame via UART
+ *
+ * @param frame buffer to send
+ * @param len number of bytes to send
+ * @return -1 if null-pointer buffer, otherwise sent bytes count
+ */
 int FrameSerial::sendFrame(const uint8_t *frame, int len) 
 {
+    if(frame == NULL) return -1;
     uint8_t buffer[40] = {0};
     buffer[0] = FRAME_START;
     buffer[1] = len + 4;
@@ -68,10 +88,17 @@ int FrameSerial::sendFrame(const uint8_t *frame, int len)
     }
     return buffer[1];
 }
-
+/**
+ * Get frame from buffer if buffer not empty
+ *
+ * @param buffer destination buffer
+ * @return -1 if no frames in buffer or null-pointer buffer, 
+ *              otherwise length of the frame
+ */
 int FrameSerial::getFrameFromBuffer(uint8_t *buffer) 
 {
     int readBytesCount = -1;
+    if (buffer == NULL) return readBytesCount;
     if(framesInBuffer() > 0)
     {
         readBytesCount = _lengthOfFramesInBuffer[_tail];
@@ -82,7 +109,12 @@ int FrameSerial::getFrameFromBuffer(uint8_t *buffer)
     return readBytesCount;
 }
 
-
+/**
+ * Receiving and processing bytes from serial
+ *
+ * @param void
+ * @return void
+ */
 void FrameSerial::processIncomingData() {
     int _bytesInBuffer = _serial->available();
     if(_bytesInBuffer > 0) 
@@ -131,6 +163,12 @@ void FrameSerial::processIncomingData() {
     }
 }
 
+/**
+ * Check if there are frames to read in buffer
+ *
+ * @param void
+ * @return number of frames in buffer
+ */
 int FrameSerial::framesInBuffer() 
 {
     int size = 0;
@@ -145,6 +183,12 @@ int FrameSerial::framesInBuffer()
     return size;
 }
 
+/**
+ * Calculate XOR checksum
+ *
+ * @param buffer bytes buffer
+ * @return XOR checksum
+ */
 uint8_t FrameSerial::calculateChecksum(const uint8_t * const buffer)
 {
     uint8_t checkSum = 0;
