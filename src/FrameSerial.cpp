@@ -48,7 +48,7 @@ uint8_t FrameSerial::available()
     return framesInBuffer();
 }
 
-int FrameSerial::sendFrame(uint8_t *frame, int len) 
+int FrameSerial::sendFrame(const uint8_t *frame, int len) 
 {
     uint8_t buffer[40] = {0};
     buffer[0] = FRAME_START;
@@ -69,7 +69,7 @@ int FrameSerial::sendFrame(uint8_t *frame, int len)
     return buffer[1];
 }
 
-int FrameSerial::getFrameFromBuffer(const uint8_t *buffer) 
+int FrameSerial::getFrameFromBuffer(uint8_t *buffer) 
 {
     int readBytesCount = -1;
     if(framesInBuffer() > 0)

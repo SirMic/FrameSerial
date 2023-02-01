@@ -1,0 +1,28 @@
+#######################################
+# Syntax Coloring Map For FrameSerial
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+FrameSerial	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+available	KEYWORD2
+sendFrame	KEYWORD2
+write	KEYWORD2
+getFrameFromBuffer	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################

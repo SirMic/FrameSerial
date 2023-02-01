@@ -39,8 +39,8 @@ public:
     ~FrameSerial();
     void begin(long baudrate);
     uint8_t available();
-    int getFrameFromBuffer(const uint8_t *buffer);
-    int sendFrame(uint8_t *frame, int len);
+    int getFrameFromBuffer(uint8_t *buffer);
+    int sendFrame(const uint8_t *frame, int len);
  
 private:
     Stream *_serial;
