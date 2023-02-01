@@ -2,6 +2,7 @@
 
 
 
+
 FrameSerial::FrameSerial(SoftwareSerial *serial)
 {
     _serial = serial; 

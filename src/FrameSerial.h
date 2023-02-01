@@ -4,6 +4,7 @@
 #include <HardwareSerial.h>
 #include <SoftwareSerial.h>
 #include <Arduino.h>
+#include "FrameTools.h"
 
 #define FRAME_BUFFER_SIZE 20
 #define MAX_FRAME_LENGTH 20
