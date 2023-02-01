@@ -17,6 +17,14 @@ available	KEYWORD2
 sendFrame	KEYWORD2
 write	KEYWORD2
 getFrameFromBuffer	KEYWORD2
+FrameTools	KEYWORD2
+floatToBytes	KEYWORD2
+intToBytes	KEYWORD2
+longToBytes	KEYWORD2
+bytesToFloat	KEYWORD2
+bytesToInt	KEYWORD2
+bytesToLong	KEYWORD2
+
 
 #######################################
 # Instances (KEYWORD2)
